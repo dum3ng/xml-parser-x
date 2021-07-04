@@ -1,0 +1,1445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmlns:uml="http://www.omg.org/spec/UML/20131001"
+         xmlns:xmi="http://www.omg.org/spec/XMI/20131001"
+         xmlns:mofext="http://www.omg.org/spec/MOF/20131001">
+	<documentation>
+		<shortDescription>UML.xmi: XMI representation of the metamodel for UML 2.5.1.</shortDescription>
+	</documentation>
+	<uml:Package xmi:type="uml:Package" xmi:id="_0" name="UML"
+                       URI="http://www.omg.org/spec/UML/20161101">
+         <packageImport xmi:type="uml:PackageImport" xmi:id="_packageImport.0"
+                        importedPackage="_0"/>
+         <packageImport xmi:type="uml:PackageImport" xmi:id="_packageImport.3"
+                        importedPackage="Classification"/>
+         
+         <packagedElement xmi:type="uml:Package" xmi:id="Values" name="Values">
+            <packageImport xmi:type="uml:PackageImport" xmi:id="Values-_packageImport.0"
+                           importedPackage="Classification"/>
+            <packagedElement xmi:type="uml:Class" xmi:id="Duration" name="Duration">
+               <ownedComment xmi:type="uml:Comment" xmi:id="Duration-_ownedComment.0"
+                             body="A Duration is a ValueSpecification that specifies the temporal distance between two time instants.">
+                  <annotatedElement xmi:idref="Duration"/>
+               </ownedComment>
+               <ownedRule xmi:type="uml:Constraint" xmi:id="Duration-no_expr_requires_observation" name="no_expr_requires_observation">
+                  <constrainedElement xmi:idref="Duration"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="Duration-no_expr_requires_observation-_ownedComment.0"
+                                body="If a Duration has no expr, then it must have a single observation that is a DurationObservation.">
+                     <annotatedElement xmi:idref="Duration-no_expr_requires_observation"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="Duration-no_expr_requires_observation-_specification">
+                     <body>expr = null implies (observation-&gt;size() = 1 and observation-&gt;forAll(oclIsKindOf(DurationObservation)))</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <generalization xmi:type="uml:Generalization" xmi:id="Duration-_generalization.0"
+                               general="ValueSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="Duration-expr" name="expr"
+                               aggregation="composite" type="ValueSpecification"
+                               association="A_expr_duration">
+                  <subsettedProperty xmi:idref="Element-ownedElement"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="Duration-expr-_ownedComment.0"
+                                body="A ValueSpecification that evaluates to the value of the Duration.">
+                     <annotatedElement xmi:idref="Duration-expr"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Duration-expr-_lowerValue"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="Duration-observation" name="observation" type="Observation"
+                               association="A_observation_duration">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="Duration-observation-_ownedComment.0"
+                                body="Refers to the Observations that are involved in the computation of the Duration value">
+                     <annotatedElement xmi:idref="Duration-observation"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Duration-observation-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="Duration-observation-_upperValue"
+                              value="*"/>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="DurationConstraint" name="DurationConstraint">
+               <ownedComment xmi:type="uml:Comment" xmi:id="DurationConstraint-_ownedComment.0"
+                             body="A DurationConstraint is a Constraint that refers to a DurationInterval.">
+                  <annotatedElement xmi:idref="DurationConstraint"/>
+               </ownedComment>
+               <ownedRule xmi:type="uml:Constraint" xmi:id="DurationConstraint-first_event_multiplicity" name="first_event_multiplicity">
+                  <constrainedElement xmi:idref="DurationConstraint"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="DurationConstraint-first_event_multiplicity-_ownedComment.0"
+                                body="The multiplicity of firstEvent must be 2 if the multiplicity of constrainedElement is 2. Otherwise the multiplicity of firstEvent is 0.">
+                     <annotatedElement xmi:idref="DurationConstraint-first_event_multiplicity"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="DurationConstraint-first_event_multiplicity-_specification">
+                     <body>if (constrainedElement-&gt;size() = 2)
+  then (firstEvent-&gt;size() = 2) else (firstEvent-&gt;size() = 0) 
+endif</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <ownedRule xmi:type="uml:Constraint"
+                          xmi:id="DurationConstraint-has_one_or_two_constrainedElements" name="has_one_or_two_constrainedElements">
+                  <constrainedElement xmi:idref="DurationConstraint"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="DurationConstraint-has_one_or_two_constrainedElements-_ownedComment.0"
+                                body="A DurationConstraint has either one or two constrainedElements.">
+                     <annotatedElement xmi:idref="DurationConstraint-has_one_or_two_constrainedElements"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="DurationConstraint-has_one_or_two_constrainedElements-_specification">
+                     <body>constrainedElement-&gt;size() = 1 or constrainedElement-&gt;size()=2</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <generalization xmi:type="uml:Generalization" xmi:id="DurationConstraint-_generalization.0"
+                               general="IntervalConstraint"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="DurationConstraint-firstEvent" name="firstEvent">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="DurationConstraint-firstEvent-_ownedComment.0"
+                                body="The value of firstEvent[i] is related to constrainedElement[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters constrainedElement[i]. If firstEvent[i] is false, then the corresponding observation event is the last time instant the execution is within constrainedElement[i].">
+                     <annotatedElement xmi:idref="DurationConstraint-firstEvent"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="DurationConstraint-firstEvent-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="DurationConstraint-firstEvent-_upperValue"
+                              value="2"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="DurationConstraint-specification" name="specification"
+                               aggregation="composite" type="DurationInterval"
+                               association="A_specification_durationConstraint">
+                  <redefinedProperty xmi:idref="IntervalConstraint-specification"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="DurationConstraint-specification-_ownedComment.0"
+                                body="The DurationInterval constraining the duration.">
+                     <annotatedElement xmi:idref="DurationConstraint-specification"/>
+                  </ownedComment>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="DurationInterval" name="DurationInterval">
+               <ownedComment xmi:type="uml:Comment" xmi:id="DurationInterval-_ownedComment.0"
+                             body="A DurationInterval defines the range between two Durations.">
+                  <annotatedElement xmi:idref="DurationInterval"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="DurationInterval-_generalization.0"
+                               general="Interval"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="DurationInterval-max" name="max" type="Duration"
+                               association="A_max_durationInterval">
+                  <redefinedProperty xmi:idref="Interval-max"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="DurationInterval-max-_ownedComment.0"
+                                body="Refers to the Duration denoting the maximum value of the range.">
+                     <annotatedElement xmi:idref="DurationInterval-max"/>
+                  </ownedComment>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="DurationInterval-min" name="min" type="Duration"
+                               association="A_min_durationInterval">
+                  <redefinedProperty xmi:idref="Interval-min"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="DurationInterval-min-_ownedComment.0"
+                                body="Refers to the Duration denoting the minimum value of the range.">
+                     <annotatedElement xmi:idref="DurationInterval-min"/>
+                  </ownedComment>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="DurationObservation" name="DurationObservation">
+               <ownedComment xmi:type="uml:Comment" xmi:id="DurationObservation-_ownedComment.0"
+                             body="A DurationObservation is a reference to a duration during an execution. It points out the NamedElement(s) in the model to observe and whether the observations are when this NamedElement is entered or when it is exited.">
+                  <annotatedElement xmi:idref="DurationObservation"/>
+               </ownedComment>
+               <ownedRule xmi:type="uml:Constraint" xmi:id="DurationObservation-first_event_multiplicity" name="first_event_multiplicity">
+                  <constrainedElement xmi:idref="DurationObservation"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="DurationObservation-first_event_multiplicity-_ownedComment.0"
+                                body="The multiplicity of firstEvent must be 2 if the multiplicity of event is 2. Otherwise the multiplicity of firstEvent is 0.">
+                     <annotatedElement xmi:idref="DurationObservation-first_event_multiplicity"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="DurationObservation-first_event_multiplicity-_specification">
+                     <body>if (event-&gt;size() = 2)
+  then (firstEvent-&gt;size() = 2) else (firstEvent-&gt;size() = 0)
+endif</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <generalization xmi:type="uml:Generalization" xmi:id="DurationObservation-_generalization.0"
+                               general="Observation"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="DurationObservation-event" name="event"
+                               isOrdered="true" type="NamedElement"
+                               association="A_event_durationObservation">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="DurationObservation-event-_ownedComment.0"
+                                body="The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.">
+                     <annotatedElement xmi:idref="DurationObservation-event"/>
+                  </ownedComment>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="DurationObservation-event-_upperValue"
+                              value="2"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="DurationObservation-firstEvent" name="firstEvent">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="DurationObservation-firstEvent-_ownedComment.0"
+                                body="The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].">
+                     <annotatedElement xmi:idref="DurationObservation-firstEvent"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="DurationObservation-firstEvent-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="DurationObservation-firstEvent-_upperValue"
+                              value="2"/>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="Expression" name="Expression">
+               <ownedComment xmi:type="uml:Comment" xmi:id="Expression-_ownedComment.0"
+                             body="An Expression represents a node in an expression tree, which may be non-terminal or terminal. It defines a symbol, and has a possibly empty sequence of operands that are ValueSpecifications. It denotes a (possibly empty) set of values when evaluated in a context.">
+                  <annotatedElement xmi:idref="Expression"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="Expression-_generalization.0"
+                               general="ValueSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="Expression-operand" name="operand"
+                               isOrdered="true"
+                               aggregation="composite" type="ValueSpecification"
+                               association="A_operand_expression">
+                  <subsettedProperty xmi:idref="Element-ownedElement"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="Expression-operand-_ownedComment.0"
+                                body="Specifies a sequence of operand ValueSpecifications.">
+                     <annotatedElement xmi:idref="Expression-operand"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Expression-operand-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="Expression-operand-_upperValue"
+                              value="*"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="Expression-symbol" name="symbol">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#String"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="Expression-symbol-_ownedComment.0"
+                                body="The symbol associated with this node in the expression tree.">
+                     <annotatedElement xmi:idref="Expression-symbol"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="Expression-symbol-_lowerValue"/>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="Interval" name="Interval">
+               <ownedComment xmi:type="uml:Comment" xmi:id="Interval-_ownedComment.0"
+                             body="An Interval defines the range between two ValueSpecifications.">
+                  <annotatedElement xmi:idref="Interval"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="Interval-_generalization.0"
+                               general="ValueSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="Interval-max" name="max" type="ValueSpecification"
+                               association="A_max_interval">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="Interval-max-_ownedComment.0"
+                                body="Refers to the ValueSpecification denoting the maximum value of the range.">
+                     <annotatedElement xmi:idref="Interval-max"/>
+                  </ownedComment>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="Interval-min" name="min" type="ValueSpecification"
+                               association="A_min_interval">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="Interval-min-_ownedComment.0"
+                                body="Refers to the ValueSpecification denoting the minimum value of the range.">
+                     <annotatedElement xmi:idref="Interval-min"/>
+                  </ownedComment>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="IntervalConstraint" name="IntervalConstraint">
+               <ownedComment xmi:type="uml:Comment" xmi:id="IntervalConstraint-_ownedComment.0"
+                             body="An IntervalConstraint is a Constraint that is specified by an Interval.">
+                  <annotatedElement xmi:idref="IntervalConstraint"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="IntervalConstraint-_generalization.0"
+                               general="Constraint"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="IntervalConstraint-specification" name="specification"
+                               aggregation="composite" type="Interval"
+                               association="A_specification_intervalConstraint">
+                  <redefinedProperty xmi:idref="Constraint-specification"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="IntervalConstraint-specification-_ownedComment.0"
+                                body="The Interval that specifies the condition of the IntervalConstraint.">
+                     <annotatedElement xmi:idref="IntervalConstraint-specification"/>
+                  </ownedComment>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="LiteralBoolean" name="LiteralBoolean">
+               <ownedComment xmi:type="uml:Comment" xmi:id="LiteralBoolean-_ownedComment.0"
+                             body="A LiteralBoolean is a specification of a Boolean value.">
+                  <annotatedElement xmi:idref="LiteralBoolean"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="LiteralBoolean-_generalization.0"
+                               general="LiteralSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="LiteralBoolean-value" name="value">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralBoolean-value-_ownedComment.0"
+                                body="The specified Boolean value.">
+                     <annotatedElement xmi:idref="LiteralBoolean-value"/>
+                  </ownedComment>
+                  <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="LiteralBoolean-value-_defaultValue"/>
+               </ownedAttribute>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralBoolean-booleanValue" name="booleanValue" isQuery="true"
+                               bodyCondition="LiteralBoolean-booleanValue-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-booleanValue"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralBoolean-booleanValue-_ownedComment.0"
+                                body="The query booleanValue() gives the value.">
+                     <annotatedElement xmi:idref="LiteralBoolean-booleanValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralBoolean-booleanValue-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralBoolean-booleanValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralBoolean-booleanValue-spec-_specification">
+                        <body>result = (value)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralBoolean-booleanValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralBoolean-isComputable" name="isComputable" isQuery="true"
+                               bodyCondition="LiteralBoolean-isComputable-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-isComputable"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralBoolean-isComputable-_ownedComment.0"
+                                body="The query isComputable() is redefined to be true.">
+                     <annotatedElement xmi:idref="LiteralBoolean-isComputable"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralBoolean-isComputable-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralBoolean-isComputable"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralBoolean-isComputable-spec-_specification">
+                        <body>result = (true)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralBoolean-isComputable-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="LiteralInteger" name="LiteralInteger">
+               <ownedComment xmi:type="uml:Comment" xmi:id="LiteralInteger-_ownedComment.0"
+                             body="A LiteralInteger is a specification of an Integer value.">
+                  <annotatedElement xmi:idref="LiteralInteger"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="LiteralInteger-_generalization.0"
+                               general="LiteralSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="LiteralInteger-value" name="value">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Integer"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralInteger-value-_ownedComment.0"
+                                body="The specified Integer value.">
+                     <annotatedElement xmi:idref="LiteralInteger-value"/>
+                  </ownedComment>
+                  <defaultValue xmi:type="uml:LiteralInteger" xmi:id="LiteralInteger-value-_defaultValue"/>
+               </ownedAttribute>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralInteger-integerValue" name="integerValue" isQuery="true"
+                               bodyCondition="LiteralInteger-integerValue-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-integerValue"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralInteger-integerValue-_ownedComment.0"
+                                body="The query integerValue() gives the value.">
+                     <annotatedElement xmi:idref="LiteralInteger-integerValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralInteger-integerValue-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralInteger-integerValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralInteger-integerValue-spec-_specification">
+                        <body>result = (value)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralInteger-integerValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Integer"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralInteger-isComputable" name="isComputable" isQuery="true"
+                               bodyCondition="LiteralInteger-isComputable-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-isComputable"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralInteger-isComputable-_ownedComment.0"
+                                body="The query isComputable() is redefined to be true.">
+                     <annotatedElement xmi:idref="LiteralInteger-isComputable"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralInteger-isComputable-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralInteger-isComputable"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralInteger-isComputable-spec-_specification">
+                        <body>result = (true)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralInteger-isComputable-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="LiteralNull" name="LiteralNull">
+               <ownedComment xmi:type="uml:Comment" xmi:id="LiteralNull-_ownedComment.0"
+                             body="A LiteralNull specifies the lack of a value.">
+                  <annotatedElement xmi:idref="LiteralNull"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="LiteralNull-_generalization.0"
+                               general="LiteralSpecification"/>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralNull-isComputable" name="isComputable" isQuery="true"
+                               bodyCondition="LiteralNull-isComputable-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-isComputable"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralNull-isComputable-_ownedComment.0"
+                                body="The query isComputable() is redefined to be true.">
+                     <annotatedElement xmi:idref="LiteralNull-isComputable"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralNull-isComputable-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralNull-isComputable"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralNull-isComputable-spec-_specification">
+                        <body>result = (true)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralNull-isComputable-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralNull-isNull" name="isNull" isQuery="true"
+                               bodyCondition="LiteralNull-isNull-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-isNull"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralNull-isNull-_ownedComment.0"
+                                body="The query isNull() returns true.">
+                     <annotatedElement xmi:idref="LiteralNull-isNull"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralNull-isNull-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralNull-isNull"/>
+                     <specification xmi:type="uml:OpaqueExpression" xmi:id="LiteralNull-isNull-spec-_specification">
+                        <body>result = (true)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralNull-isNull-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="LiteralReal" name="LiteralReal">
+               <ownedComment xmi:type="uml:Comment" xmi:id="LiteralReal-_ownedComment.0"
+                             body="A LiteralReal is a specification of a Real value.">
+                  <annotatedElement xmi:idref="LiteralReal"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="LiteralReal-_generalization.0"
+                               general="LiteralSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="LiteralReal-value" name="value">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Real"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralReal-value-_ownedComment.0"
+                                body="The specified Real value.">
+                     <annotatedElement xmi:idref="LiteralReal-value"/>
+                  </ownedComment>
+               </ownedAttribute>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralReal-isComputable" name="isComputable" isQuery="true"
+                               bodyCondition="LiteralReal-isComputable-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-isComputable"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralReal-isComputable-_ownedComment.0"
+                                body="The query isComputable() is redefined to be true.">
+                     <annotatedElement xmi:idref="LiteralReal-isComputable"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralReal-isComputable-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralReal-isComputable"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralReal-isComputable-spec-_specification">
+                        <body>result = (true)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralReal-isComputable-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralReal-realValue" name="realValue" isQuery="true"
+                               bodyCondition="LiteralReal-realValue-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-realValue"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralReal-realValue-_ownedComment.0"
+                                body="The query realValue() gives the value.">
+                     <annotatedElement xmi:idref="LiteralReal-realValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralReal-realValue-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralReal-realValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralReal-realValue-spec-_specification">
+                        <body>result = (value)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralReal-realValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Real"/>
+                  </ownedParameter>
+               </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="LiteralSpecification" name="LiteralSpecification" isAbstract="true">
+               <ownedComment xmi:type="uml:Comment" xmi:id="LiteralSpecification-_ownedComment.0"
+                             body="A LiteralSpecification identifies a literal constant being modeled.">
+                  <annotatedElement xmi:idref="LiteralSpecification"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="LiteralSpecification-_generalization.0"
+                               general="ValueSpecification"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="LiteralString" name="LiteralString">
+               <ownedComment xmi:type="uml:Comment" xmi:id="LiteralString-_ownedComment.0"
+                             body="A LiteralString is a specification of a String value.">
+                  <annotatedElement xmi:idref="LiteralString"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="LiteralString-_generalization.0"
+                               general="LiteralSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="LiteralString-value" name="value">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#String"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralString-value-_ownedComment.0"
+                                body="The specified String value.">
+                     <annotatedElement xmi:idref="LiteralString-value"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="LiteralString-value-_lowerValue"/>
+               </ownedAttribute>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralString-isComputable" name="isComputable" isQuery="true"
+                               bodyCondition="LiteralString-isComputable-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-isComputable"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralString-isComputable-_ownedComment.0"
+                                body="The query isComputable() is redefined to be true.">
+                     <annotatedElement xmi:idref="LiteralString-isComputable"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralString-isComputable-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralString-isComputable"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralString-isComputable-spec-_specification">
+                        <body>result = (true)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralString-isComputable-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralString-stringValue" name="stringValue" isQuery="true"
+                               bodyCondition="LiteralString-stringValue-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-stringValue"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralString-stringValue-_ownedComment.0"
+                                body="The query stringValue() gives the value.">
+                     <annotatedElement xmi:idref="LiteralString-stringValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralString-stringValue-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralString-stringValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralString-stringValue-spec-_specification">
+                        <body>result = (value)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralString-stringValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#String"/>
+                  </ownedParameter>
+               </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="LiteralUnlimitedNatural" name="LiteralUnlimitedNatural">
+               <ownedComment xmi:type="uml:Comment" xmi:id="LiteralUnlimitedNatural-_ownedComment.0"
+                             body="A LiteralUnlimitedNatural is a specification of an UnlimitedNatural number.">
+                  <annotatedElement xmi:idref="LiteralUnlimitedNatural"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization"
+                               xmi:id="LiteralUnlimitedNatural-_generalization.0"
+                               general="LiteralSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="LiteralUnlimitedNatural-value" name="value">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#UnlimitedNatural"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="LiteralUnlimitedNatural-value-_ownedComment.0"
+                                body="The specified UnlimitedNatural value.">
+                     <annotatedElement xmi:idref="LiteralUnlimitedNatural-value"/>
+                  </ownedComment>
+                  <defaultValue xmi:type="uml:LiteralUnlimitedNatural"
+                                xmi:id="LiteralUnlimitedNatural-value-_defaultValue"/>
+               </ownedAttribute>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralUnlimitedNatural-isComputable" name="isComputable" isQuery="true"
+                               bodyCondition="LiteralUnlimitedNatural-isComputable-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-isComputable"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="LiteralUnlimitedNatural-isComputable-_ownedComment.0"
+                                body="The query isComputable() is redefined to be true.">
+                     <annotatedElement xmi:idref="LiteralUnlimitedNatural-isComputable"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralUnlimitedNatural-isComputable-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralUnlimitedNatural-isComputable"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralUnlimitedNatural-isComputable-spec-_specification">
+                        <body>result = (true)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralUnlimitedNatural-isComputable-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="LiteralUnlimitedNatural-unlimitedValue" name="unlimitedValue" isQuery="true"
+                               bodyCondition="LiteralUnlimitedNatural-unlimitedValue-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-unlimitedValue"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="LiteralUnlimitedNatural-unlimitedValue-_ownedComment.0"
+                                body="The query unlimitedValue() gives the value.">
+                     <annotatedElement xmi:idref="LiteralUnlimitedNatural-unlimitedValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="LiteralUnlimitedNatural-unlimitedValue-spec" name="spec">
+                     <constrainedElement xmi:idref="LiteralUnlimitedNatural-unlimitedValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="LiteralUnlimitedNatural-unlimitedValue-spec-_specification">
+                        <body>result = (value)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="LiteralUnlimitedNatural-unlimitedValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#UnlimitedNatural"/>
+                  </ownedParameter>
+               </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="Observation" name="Observation" isAbstract="true">
+               <ownedComment xmi:type="uml:Comment" xmi:id="Observation-_ownedComment.0"
+                             body="Observation specifies a value determined by observing an event or events that occur relative to other model Elements.">
+                  <annotatedElement xmi:idref="Observation"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="Observation-_generalization.0"
+                               general="PackageableElement"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="OpaqueExpression" name="OpaqueExpression">
+               <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-_ownedComment.0"
+                             body="An OpaqueExpression is a ValueSpecification that specifies the computation of a collection of values either in terms of a UML Behavior or based on a textual statement in a language other than UML">
+                  <annotatedElement xmi:idref="OpaqueExpression"/>
+               </ownedComment>
+               <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-language_body_size" name="language_body_size">
+                  <constrainedElement xmi:idref="OpaqueExpression"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="OpaqueExpression-language_body_size-_ownedComment.0"
+                                body="If the language attribute is not empty, then the size of the body and language arrays must be the same.">
+                     <annotatedElement xmi:idref="OpaqueExpression-language_body_size"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="OpaqueExpression-language_body_size-_specification">
+                     <body>language-&gt;notEmpty() implies (_'body'-&gt;size() = language-&gt;size())</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-one_return_result_parameter" name="one_return_result_parameter">
+                  <constrainedElement xmi:idref="OpaqueExpression"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="OpaqueExpression-one_return_result_parameter-_ownedComment.0"
+                                body="The behavior must have exactly one return result parameter.">
+                     <annotatedElement xmi:idref="OpaqueExpression-one_return_result_parameter"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="OpaqueExpression-one_return_result_parameter-_specification">
+                     <body>behavior &lt;&gt; null implies
+   behavior.ownedParameter-&gt;select(direction=ParameterDirectionKind::return)-&gt;size() = 1</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <ownedRule xmi:type="uml:Constraint"
+                          xmi:id="OpaqueExpression-only_in_or_return_parameters" name="only_in_or_return_parameters">
+                  <constrainedElement xmi:idref="OpaqueExpression"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="OpaqueExpression-only_in_or_return_parameters-_ownedComment.0"
+                                body="The behavior may only have non-stream in or return parameters.">
+                     <annotatedElement xmi:idref="OpaqueExpression-only_in_or_return_parameters"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="OpaqueExpression-only_in_or_return_parameters-_specification">
+                     <body>behavior &lt;&gt; null implies behavior.ownedParameter-&gt;forAll(not isStream and
+(direction=ParameterDirectionKind::in or direction=ParameterDirectionKind::return))</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <generalization xmi:type="uml:Generalization" xmi:id="OpaqueExpression-_generalization.0"
+                               general="ValueSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="OpaqueExpression-behavior" name="behavior" type="Behavior"
+                               association="A_behavior_opaqueExpression">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-behavior-_ownedComment.0"
+                                body="Specifies the behavior of the OpaqueExpression as a UML Behavior.">
+                     <annotatedElement xmi:idref="OpaqueExpression-behavior"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="OpaqueExpression-behavior-_lowerValue"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="OpaqueExpression-body" name="body"
+                               isOrdered="true"
+                               isUnique="false">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#String"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-body-_ownedComment.0"
+                                body="A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.">
+                     <annotatedElement xmi:idref="OpaqueExpression-body"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="OpaqueExpression-body-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="OpaqueExpression-body-_upperValue"
+                              value="*"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="OpaqueExpression-language" name="language"
+                               isOrdered="true">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#String"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-language-_ownedComment.0"
+                                body="Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.">
+                     <annotatedElement xmi:idref="OpaqueExpression-language"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="OpaqueExpression-language-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="OpaqueExpression-language-_upperValue"
+                              value="*"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="OpaqueExpression-result" name="result" isReadOnly="true"
+                               isDerived="true" type="Parameter"
+                               association="A_result_opaqueExpression">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-result-_ownedComment.0"
+                                body="If an OpaqueExpression is specified using a UML Behavior, then this refers to the single required return Parameter of that Behavior. When the Behavior completes execution, the values on this Parameter give the result of evaluating the OpaqueExpression.">
+                     <annotatedElement xmi:idref="OpaqueExpression-result"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="OpaqueExpression-result-_lowerValue"/>
+               </ownedAttribute>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="OpaqueExpression-isIntegral" name="isIntegral" isQuery="true"
+                               bodyCondition="OpaqueExpression-isIntegral-spec">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-isIntegral-_ownedComment.0"
+                                body="The query isIntegral() tells whether an expression is intended to produce an Integer.">
+                     <annotatedElement xmi:idref="OpaqueExpression-isIntegral"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-isIntegral-spec" name="spec">
+                     <constrainedElement xmi:idref="OpaqueExpression-isIntegral"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="OpaqueExpression-isIntegral-spec-_specification">
+                        <body>result = (false)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="OpaqueExpression-isIntegral-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="OpaqueExpression-isNonNegative" name="isNonNegative" isQuery="true"
+                               bodyCondition="OpaqueExpression-isNonNegative-spec">
+                  <precondition xmi:idref="OpaqueExpression-isNonNegative-pre"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-isNonNegative-_ownedComment.0"
+                                body="The query isNonNegative() tells whether an integer expression has a non-negative value.">
+                     <annotatedElement xmi:idref="OpaqueExpression-isNonNegative"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-isNonNegative-pre" name="pre">
+                     <constrainedElement xmi:idref="OpaqueExpression-isNonNegative"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="OpaqueExpression-isNonNegative-pre-_specification">
+                        <body>self.isIntegral()</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-isNonNegative-spec" name="spec">
+                     <constrainedElement xmi:idref="OpaqueExpression-isNonNegative"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="OpaqueExpression-isNonNegative-spec-_specification">
+                        <body>result = (false)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="OpaqueExpression-isNonNegative-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="OpaqueExpression-isPositive" name="isPositive" isQuery="true"
+                               bodyCondition="OpaqueExpression-isPositive-spec">
+                  <precondition xmi:idref="OpaqueExpression-isPositive-pre"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-isPositive-_ownedComment.0"
+                                body="The query isPositive() tells whether an integer expression has a positive value.">
+                     <annotatedElement xmi:idref="OpaqueExpression-isPositive"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-isPositive-spec" name="spec">
+                     <constrainedElement xmi:idref="OpaqueExpression-isPositive"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="OpaqueExpression-isPositive-spec-_specification">
+                        <body>result = (false)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-isPositive-pre" name="pre">
+                     <constrainedElement xmi:idref="OpaqueExpression-isPositive"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="OpaqueExpression-isPositive-pre-_specification">
+                        <body>self.isIntegral()</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="OpaqueExpression-isPositive-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="OpaqueExpression-result.1" name="result" isQuery="true"
+                               bodyCondition="OpaqueExpression-result.1-spec">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-result.1-_ownedComment.0"
+                                body="Derivation for OpaqueExpression::/result ">
+                     <annotatedElement xmi:idref="OpaqueExpression-result.1"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-result.1-spec" name="spec">
+                     <constrainedElement xmi:idref="OpaqueExpression-result.1"/>
+                     <constrainedElement xmi:idref="OpaqueExpression-result"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="OpaqueExpression-result.1-spec-_specification">
+                        <body>result = (if behavior = null then
+	null
+else
+	behavior.ownedParameter-&gt;first()
+endif)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="OpaqueExpression-result.1-result" name="result"
+                                  direction="return" type="Parameter">
+                     <lowerValue xmi:type="uml:LiteralInteger"
+                                 xmi:id="OpaqueExpression-result.1-result-_lowerValue"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="OpaqueExpression-value" name="value" isQuery="true"
+                               bodyCondition="OpaqueExpression-value-spec">
+                  <precondition xmi:idref="OpaqueExpression-value-pre"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="OpaqueExpression-value-_ownedComment.0"
+                                body="The query value() gives an integer value for an expression intended to produce one.">
+                     <annotatedElement xmi:idref="OpaqueExpression-value"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-value-pre" name="pre">
+                     <constrainedElement xmi:idref="OpaqueExpression-value"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="OpaqueExpression-value-pre-_specification">
+                        <body>self.isIntegral()</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="OpaqueExpression-value-spec" name="spec">
+                     <constrainedElement xmi:idref="OpaqueExpression-value"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="OpaqueExpression-value-spec-_specification">
+                        <body>result = (0)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="OpaqueExpression-value-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Integer"/>
+                  </ownedParameter>
+               </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="StringExpression" name="StringExpression">
+               <ownedComment xmi:type="uml:Comment" xmi:id="StringExpression-_ownedComment.0"
+                             body="A StringExpression is an Expression that specifies a String value that is derived by concatenating a sequence of operands with String values or a sequence of subExpressions, some of which might be template parameters.">
+                  <annotatedElement xmi:idref="StringExpression"/>
+               </ownedComment>
+               <ownedRule xmi:type="uml:Constraint" xmi:id="StringExpression-operands" name="operands">
+                  <constrainedElement xmi:idref="StringExpression"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="StringExpression-operands-_ownedComment.0"
+                                body="All the operands of a StringExpression must be LiteralStrings">
+                     <annotatedElement xmi:idref="StringExpression-operands"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="StringExpression-operands-_specification">
+                     <body>operand-&gt;forAll (oclIsKindOf (LiteralString))</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <ownedRule xmi:type="uml:Constraint" xmi:id="StringExpression-subexpressions" name="subexpressions">
+                  <constrainedElement xmi:idref="StringExpression"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="StringExpression-subexpressions-_ownedComment.0"
+                                body="If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).">
+                     <annotatedElement xmi:idref="StringExpression-subexpressions"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="StringExpression-subexpressions-_specification">
+                     <body>if subExpression-&gt;notEmpty() then operand-&gt;isEmpty() else operand-&gt;notEmpty() endif</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <generalization xmi:type="uml:Generalization" xmi:id="StringExpression-_generalization.1"
+                               general="TemplateableElement"/>
+               <generalization xmi:type="uml:Generalization" xmi:id="StringExpression-_generalization.0"
+                               general="Expression"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="StringExpression-owningExpression" name="owningExpression" type="StringExpression"
+                               association="A_subExpression_owningExpression">
+                  <subsettedProperty xmi:idref="Element-owner"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="StringExpression-owningExpression-_ownedComment.0"
+                                body="The StringExpression of which this StringExpression is a subExpression.">
+                     <annotatedElement xmi:idref="StringExpression-owningExpression"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="StringExpression-owningExpression-_lowerValue"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="StringExpression-subExpression" name="subExpression"
+                               isOrdered="true"
+                               aggregation="composite" type="StringExpression"
+                               association="A_subExpression_owningExpression">
+                  <subsettedProperty xmi:idref="Element-ownedElement"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="StringExpression-subExpression-_ownedComment.0"
+                                body="The StringExpressions that constitute this StringExpression.">
+                     <annotatedElement xmi:idref="StringExpression-subExpression"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="StringExpression-subExpression-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="StringExpression-subExpression-_upperValue"
+                              value="*"/>
+               </ownedAttribute>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="StringExpression-stringValue" name="stringValue" isQuery="true"
+                               bodyCondition="StringExpression-stringValue-spec">
+                  <redefinedOperation xmi:idref="ValueSpecification-stringValue"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="StringExpression-stringValue-_ownedComment.0"
+                                body="The query stringValue() returns the String resulting from concatenating, in order, all the component String values of all the operands or subExpressions that are part of the StringExpression.">
+                     <annotatedElement xmi:idref="StringExpression-stringValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="StringExpression-stringValue-spec" name="spec">
+                     <constrainedElement xmi:idref="StringExpression-stringValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="StringExpression-stringValue-spec-_specification">
+                        <body>result = (if subExpression-&gt;notEmpty()
+then subExpression-&gt;iterate(se; stringValue: String = '' | stringValue.concat(se.stringValue()))
+else operand-&gt;iterate(op; stringValue: String = '' | stringValue.concat(op.stringValue()))
+endif)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="StringExpression-stringValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#String"/>
+                  </ownedParameter>
+               </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="TimeConstraint" name="TimeConstraint">
+               <ownedComment xmi:type="uml:Comment" xmi:id="TimeConstraint-_ownedComment.0"
+                             body="A TimeConstraint is a Constraint that refers to a TimeInterval.">
+                  <annotatedElement xmi:idref="TimeConstraint"/>
+               </ownedComment>
+               <ownedRule xmi:type="uml:Constraint" xmi:id="TimeConstraint-has_one_constrainedElement" name="has_one_constrainedElement">
+                  <constrainedElement xmi:idref="TimeConstraint"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="TimeConstraint-has_one_constrainedElement-_ownedComment.0"
+                                body="A TimeConstraint has one constrainedElement.">
+                     <annotatedElement xmi:idref="TimeConstraint-has_one_constrainedElement"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="TimeConstraint-has_one_constrainedElement-_specification">
+                     <body>constrainedElement-&gt;size() = 1</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <generalization xmi:type="uml:Generalization" xmi:id="TimeConstraint-_generalization.0"
+                               general="IntervalConstraint"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="TimeConstraint-firstEvent" name="firstEvent">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="TimeConstraint-firstEvent-_ownedComment.0"
+                                body="The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.">
+                     <annotatedElement xmi:idref="TimeConstraint-firstEvent"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="TimeConstraint-firstEvent-_lowerValue"/>
+                  <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="TimeConstraint-firstEvent-_defaultValue"
+                                value="true"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="TimeConstraint-specification" name="specification"
+                               aggregation="composite" type="TimeInterval"
+                               association="A_specification_timeConstraint">
+                  <redefinedProperty xmi:idref="IntervalConstraint-specification"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="TimeConstraint-specification-_ownedComment.0"
+                                body="TheTimeInterval constraining the duration.">
+                     <annotatedElement xmi:idref="TimeConstraint-specification"/>
+                  </ownedComment>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="TimeExpression" name="TimeExpression">
+               <ownedComment xmi:type="uml:Comment" xmi:id="TimeExpression-_ownedComment.0"
+                             body="A TimeExpression is a ValueSpecification that represents a time value.">
+                  <annotatedElement xmi:idref="TimeExpression"/>
+               </ownedComment>
+               <ownedRule xmi:type="uml:Constraint" xmi:id="TimeExpression-no_expr_requires_observation" name="no_expr_requires_observation">
+                  <constrainedElement xmi:idref="TimeExpression"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="TimeExpression-no_expr_requires_observation-_ownedComment.0"
+                                body="If a TimeExpression has no expr, then it must have a single observation that is a TimeObservation.">
+                     <annotatedElement xmi:idref="TimeExpression-no_expr_requires_observation"/>
+                  </ownedComment>
+                  <specification xmi:type="uml:OpaqueExpression"
+                                 xmi:id="TimeExpression-no_expr_requires_observation-_specification">
+                     <body>expr = null implies (observation-&gt;size() = 1 and observation-&gt;forAll(oclIsKindOf(TimeObservation)))</body>
+                     <language>OCL</language>
+                  </specification>
+               </ownedRule>
+               <generalization xmi:type="uml:Generalization" xmi:id="TimeExpression-_generalization.0"
+                               general="ValueSpecification"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="TimeExpression-expr" name="expr"
+                               aggregation="composite" type="ValueSpecification"
+                               association="A_expr_timeExpression">
+                  <subsettedProperty xmi:idref="Element-ownedElement"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="TimeExpression-expr-_ownedComment.0"
+                                body="A ValueSpecification that evaluates to the value of the TimeExpression.">
+                     <annotatedElement xmi:idref="TimeExpression-expr"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="TimeExpression-expr-_lowerValue"/>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="TimeExpression-observation" name="observation" type="Observation"
+                               association="A_observation_timeExpression">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="TimeExpression-observation-_ownedComment.0"
+                                body="Refers to the Observations that are involved in the computation of the TimeExpression value.">
+                     <annotatedElement xmi:idref="TimeExpression-observation"/>
+                  </ownedComment>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="TimeExpression-observation-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="TimeExpression-observation-_upperValue"
+                              value="*"/>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="TimeInterval" name="TimeInterval">
+               <ownedComment xmi:type="uml:Comment" xmi:id="TimeInterval-_ownedComment.0"
+                             body="A TimeInterval defines the range between two TimeExpressions.">
+                  <annotatedElement xmi:idref="TimeInterval"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="TimeInterval-_generalization.0"
+                               general="Interval"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="TimeInterval-max" name="max" type="TimeExpression"
+                               association="A_max_timeInterval">
+                  <redefinedProperty xmi:idref="Interval-max"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="TimeInterval-max-_ownedComment.0"
+                                body="Refers to the TimeExpression denoting the maximum value of the range.">
+                     <annotatedElement xmi:idref="TimeInterval-max"/>
+                  </ownedComment>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="TimeInterval-min" name="min" type="TimeExpression"
+                               association="A_min_timeInterval">
+                  <redefinedProperty xmi:idref="Interval-min"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="TimeInterval-min-_ownedComment.0"
+                                body="Refers to the TimeExpression denoting the minimum value of the range.">
+                     <annotatedElement xmi:idref="TimeInterval-min"/>
+                  </ownedComment>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="TimeObservation" name="TimeObservation">
+               <ownedComment xmi:type="uml:Comment" xmi:id="TimeObservation-_ownedComment.0"
+                             body="A TimeObservation is a reference to a time instant during an execution. It points out the NamedElement in the model to observe and whether the observation is when this NamedElement is entered or when it is exited.">
+                  <annotatedElement xmi:idref="TimeObservation"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="TimeObservation-_generalization.0"
+                               general="Observation"/>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="TimeObservation-event" name="event" type="NamedElement"
+                               association="A_event_timeObservation">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="TimeObservation-event-_ownedComment.0"
+                                body="The TimeObservation is determined by the entering or exiting of the event Element during execution.">
+                     <annotatedElement xmi:idref="TimeObservation-event"/>
+                  </ownedComment>
+               </ownedAttribute>
+               <ownedAttribute xmi:type="uml:Property" xmi:id="TimeObservation-firstEvent" name="firstEvent">
+                  <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  <ownedComment xmi:type="uml:Comment" xmi:id="TimeObservation-firstEvent-_ownedComment.0"
+                                body="The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding observation event is the time instant the execution exits the event Element.">
+                     <annotatedElement xmi:idref="TimeObservation-firstEvent"/>
+                  </ownedComment>
+                  <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="TimeObservation-firstEvent-_defaultValue"
+                                value="true"/>
+               </ownedAttribute>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="ValueSpecification" name="ValueSpecification" isAbstract="true">
+               <ownedComment xmi:type="uml:Comment" xmi:id="ValueSpecification-_ownedComment.0"
+                             body="A ValueSpecification is the specification of a (possibly empty) set of values. A ValueSpecification is a ParameterableElement that may be exposed as a formal TemplateParameter and provided as the actual parameter in the binding of a template.">
+                  <annotatedElement xmi:idref="ValueSpecification"/>
+               </ownedComment>
+               <generalization xmi:type="uml:Generalization" xmi:id="ValueSpecification-_generalization.0"
+                               general="TypedElement"/>
+               <generalization xmi:type="uml:Generalization" xmi:id="ValueSpecification-_generalization.1"
+                               general="PackageableElement"/>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="ValueSpecification-booleanValue" name="booleanValue" isQuery="true"
+                               bodyCondition="ValueSpecification-booleanValue-spec">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="ValueSpecification-booleanValue-_ownedComment.0"
+                                body="The query booleanValue() gives a single Boolean value when one can be computed.">
+                     <annotatedElement xmi:idref="ValueSpecification-booleanValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="ValueSpecification-booleanValue-spec" name="spec">
+                     <constrainedElement xmi:idref="ValueSpecification-booleanValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="ValueSpecification-booleanValue-spec-_specification">
+                        <body>result = (null)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="ValueSpecification-booleanValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                     <lowerValue xmi:type="uml:LiteralInteger"
+                                 xmi:id="ValueSpecification-booleanValue-result-_lowerValue"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="ValueSpecification-integerValue" name="integerValue" isQuery="true"
+                               bodyCondition="ValueSpecification-integerValue-spec">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="ValueSpecification-integerValue-_ownedComment.0"
+                                body="The query integerValue() gives a single Integer value when one can be computed.">
+                     <annotatedElement xmi:idref="ValueSpecification-integerValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="ValueSpecification-integerValue-spec" name="spec">
+                     <constrainedElement xmi:idref="ValueSpecification-integerValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="ValueSpecification-integerValue-spec-_specification">
+                        <body>result = (null)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="ValueSpecification-integerValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Integer"/>
+                     <lowerValue xmi:type="uml:LiteralInteger"
+                                 xmi:id="ValueSpecification-integerValue-result-_lowerValue"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="ValueSpecification-isCompatibleWith" name="isCompatibleWith" isQuery="true"
+                               bodyCondition="ValueSpecification-isCompatibleWith-spec">
+                  <redefinedOperation xmi:idref="ParameterableElement-isCompatibleWith"/>
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="ValueSpecification-isCompatibleWith-_ownedComment.0"
+                                body="The query isCompatibleWith() determines if this ValueSpecification is compatible with the specified ParameterableElement. This ValueSpecification is compatible with ParameterableElement p if the kind of this ValueSpecification is the same as or a subtype of the kind of p. Further, if p is a TypedElement, then the type of this ValueSpecification must be conformant with the type of p.">
+                     <annotatedElement xmi:idref="ValueSpecification-isCompatibleWith"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="ValueSpecification-isCompatibleWith-spec" name="spec">
+                     <constrainedElement xmi:idref="ValueSpecification-isCompatibleWith"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="ValueSpecification-isCompatibleWith-spec-_specification">
+                        <body>result = (self.oclIsKindOf(p.oclType()) and (p.oclIsKindOf(TypedElement) implies 
+self.type.conformsTo(p.oclAsType(TypedElement).type)))</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="ValueSpecification-isCompatibleWith-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="ValueSpecification-isCompatibleWith-p" name="p" type="ParameterableElement"/>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="ValueSpecification-isComputable" name="isComputable" isQuery="true"
+                               bodyCondition="ValueSpecification-isComputable-spec">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="ValueSpecification-isComputable-_ownedComment.0"
+                                body="The query isComputable() determines whether a value specification can be computed in a model. This operation cannot be fully defined in OCL. A conforming implementation is expected to deliver true for this operation for all ValueSpecifications that it can compute, and to compute all of those for which the operation is true. A conforming implementation is expected to be able to compute at least the value of all LiteralSpecifications.">
+                     <annotatedElement xmi:idref="ValueSpecification-isComputable"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="ValueSpecification-isComputable-spec" name="spec">
+                     <constrainedElement xmi:idref="ValueSpecification-isComputable"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="ValueSpecification-isComputable-spec-_specification">
+                        <body>result = (false)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="ValueSpecification-isComputable-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="ValueSpecification-isNull" name="isNull" isQuery="true"
+                               bodyCondition="ValueSpecification-isNull-spec">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="ValueSpecification-isNull-_ownedComment.0"
+                                body="The query isNull() returns true when it can be computed that the value is null.">
+                     <annotatedElement xmi:idref="ValueSpecification-isNull"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="ValueSpecification-isNull-spec" name="spec">
+                     <constrainedElement xmi:idref="ValueSpecification-isNull"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="ValueSpecification-isNull-spec-_specification">
+                        <body>result = (false)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="ValueSpecification-isNull-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="ValueSpecification-realValue" name="realValue" isQuery="true"
+                               bodyCondition="ValueSpecification-realValue-spec">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="ValueSpecification-realValue-_ownedComment.0"
+                                body="The query realValue() gives a single Real value when one can be computed.">
+                     <annotatedElement xmi:idref="ValueSpecification-realValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="ValueSpecification-realValue-spec" name="spec">
+                     <constrainedElement xmi:idref="ValueSpecification-realValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="ValueSpecification-realValue-spec-_specification">
+                        <body>result = (null)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="ValueSpecification-realValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Real"/>
+                     <lowerValue xmi:type="uml:LiteralInteger"
+                                 xmi:id="ValueSpecification-realValue-result-_lowerValue"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="ValueSpecification-stringValue" name="stringValue" isQuery="true"
+                               bodyCondition="ValueSpecification-stringValue-spec">
+                  <ownedComment xmi:type="uml:Comment" xmi:id="ValueSpecification-stringValue-_ownedComment.0"
+                                body="The query stringValue() gives a single String value when one can be computed.">
+                     <annotatedElement xmi:idref="ValueSpecification-stringValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="ValueSpecification-stringValue-spec" name="spec">
+                     <constrainedElement xmi:idref="ValueSpecification-stringValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="ValueSpecification-stringValue-spec-_specification">
+                        <body>result = (null)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="ValueSpecification-stringValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#String"/>
+                     <lowerValue xmi:type="uml:LiteralInteger"
+                                 xmi:id="ValueSpecification-stringValue-result-_lowerValue"/>
+                  </ownedParameter>
+               </ownedOperation>
+               <ownedOperation xmi:type="uml:Operation" xmi:id="ValueSpecification-unlimitedValue" name="unlimitedValue" isQuery="true"
+                               bodyCondition="ValueSpecification-unlimitedValue-spec">
+                  <ownedComment xmi:type="uml:Comment"
+                                xmi:id="ValueSpecification-unlimitedValue-_ownedComment.0"
+                                body="The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.">
+                     <annotatedElement xmi:idref="ValueSpecification-unlimitedValue"/>
+                  </ownedComment>
+                  <ownedRule xmi:type="uml:Constraint" xmi:id="ValueSpecification-unlimitedValue-spec" name="spec">
+                     <constrainedElement xmi:idref="ValueSpecification-unlimitedValue"/>
+                     <specification xmi:type="uml:OpaqueExpression"
+                                    xmi:id="ValueSpecification-unlimitedValue-spec-_specification">
+                        <body>result = (null)</body>
+                        <language>OCL</language>
+                     </specification>
+                  </ownedRule>
+                  <ownedParameter xmi:type="uml:Parameter" xmi:id="ValueSpecification-unlimitedValue-result" name="result"
+                                  direction="return">
+                     <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#UnlimitedNatural"/>
+                     <lowerValue xmi:type="uml:LiteralInteger"
+                                 xmi:id="ValueSpecification-unlimitedValue-result-_lowerValue"/>
+                  </ownedParameter>
+               </ownedOperation>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_event_timeObservation" name="A_event_timeObservation">
+               <memberEnd xmi:idref="TimeObservation-event"/>
+               <memberEnd xmi:idref="A_event_timeObservation-timeObservation"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_event_timeObservation-timeObservation" name="timeObservation" type="TimeObservation"
+                         association="A_event_timeObservation">
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_event_timeObservation-timeObservation-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_event_timeObservation-timeObservation-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_max_timeInterval" name="A_max_timeInterval">
+               <memberEnd xmi:idref="TimeInterval-max"/>
+               <memberEnd xmi:idref="A_max_timeInterval-timeInterval"/>
+               <generalization xmi:type="uml:Generalization" xmi:id="A_max_timeInterval-_generalization.0"
+                               general="A_max_interval"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_max_timeInterval-timeInterval" name="timeInterval" type="TimeInterval"
+                         association="A_max_timeInterval">
+                  <redefinedProperty xmi:idref="A_max_interval-interval"/>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_max_timeInterval-timeInterval-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_max_timeInterval-timeInterval-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_min_timeInterval" name="A_min_timeInterval">
+               <memberEnd xmi:idref="TimeInterval-min"/>
+               <memberEnd xmi:idref="A_min_timeInterval-timeInterval"/>
+               <generalization xmi:type="uml:Generalization" xmi:id="A_min_timeInterval-_generalization.0"
+                               general="A_min_interval"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_min_timeInterval-timeInterval" name="timeInterval" type="TimeInterval"
+                         association="A_min_timeInterval">
+                  <redefinedProperty xmi:idref="A_min_interval-interval"/>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_min_timeInterval-timeInterval-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_min_timeInterval-timeInterval-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_expr_timeExpression" name="A_expr_timeExpression">
+               <memberEnd xmi:idref="TimeExpression-expr"/>
+               <memberEnd xmi:idref="A_expr_timeExpression-timeExpression"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_expr_timeExpression-timeExpression" name="timeExpression" type="TimeExpression"
+                         association="A_expr_timeExpression">
+                  <subsettedProperty xmi:idref="Element-owner"/>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_expr_timeExpression-timeExpression-_lowerValue"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_observation_timeExpression" name="A_observation_timeExpression">
+               <memberEnd xmi:idref="TimeExpression-observation"/>
+               <memberEnd xmi:idref="A_observation_timeExpression-timeExpression"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_observation_timeExpression-timeExpression" name="timeExpression" type="TimeExpression"
+                         association="A_observation_timeExpression">
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_observation_timeExpression-timeExpression-_lowerValue"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_specification_timeConstraint" name="A_specification_timeConstraint">
+               <memberEnd xmi:idref="TimeConstraint-specification"/>
+               <memberEnd xmi:idref="A_specification_timeConstraint-timeConstraint"/>
+               <generalization xmi:type="uml:Generalization"
+                               xmi:id="A_specification_timeConstraint-_generalization.0"
+                               general="A_specification_intervalConstraint"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_specification_timeConstraint-timeConstraint" name="timeConstraint" type="TimeConstraint"
+                         association="A_specification_timeConstraint">
+                  <redefinedProperty xmi:idref="A_specification_intervalConstraint-intervalConstraint"/>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_specification_timeConstraint-timeConstraint-_lowerValue"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_subExpression_owningExpression" name="A_subExpression_owningExpression">
+               <memberEnd xmi:idref="StringExpression-subExpression"/>
+               <memberEnd xmi:idref="StringExpression-owningExpression"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_result_opaqueExpression" name="A_result_opaqueExpression"
+                             isDerived="true">
+               <memberEnd xmi:idref="OpaqueExpression-result"/>
+               <memberEnd xmi:idref="A_result_opaqueExpression-opaqueExpression"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_result_opaqueExpression-opaqueExpression" name="opaqueExpression" type="OpaqueExpression"
+                         association="A_result_opaqueExpression">
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_result_opaqueExpression-opaqueExpression-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_result_opaqueExpression-opaqueExpression-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_behavior_opaqueExpression" name="A_behavior_opaqueExpression">
+               <memberEnd xmi:idref="OpaqueExpression-behavior"/>
+               <memberEnd xmi:idref="A_behavior_opaqueExpression-opaqueExpression"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_behavior_opaqueExpression-opaqueExpression" name="opaqueExpression" type="OpaqueExpression"
+                         association="A_behavior_opaqueExpression">
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_behavior_opaqueExpression-opaqueExpression-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_behavior_opaqueExpression-opaqueExpression-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_specification_intervalConstraint" name="A_specification_intervalConstraint">
+               <memberEnd xmi:idref="IntervalConstraint-specification"/>
+               <memberEnd xmi:idref="A_specification_intervalConstraint-intervalConstraint"/>
+               <generalization xmi:type="uml:Generalization"
+                               xmi:id="A_specification_intervalConstraint-_generalization.0"
+                               general="A_specification_owningConstraint"/>
+               <ownedEnd xmi:type="uml:Property"
+                         xmi:id="A_specification_intervalConstraint-intervalConstraint" name="intervalConstraint" type="IntervalConstraint"
+                         association="A_specification_intervalConstraint">
+                  <redefinedProperty xmi:idref="A_specification_owningConstraint-owningConstraint"/>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_specification_intervalConstraint-intervalConstraint-_lowerValue"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_max_interval" name="A_max_interval">
+               <memberEnd xmi:idref="Interval-max"/>
+               <memberEnd xmi:idref="A_max_interval-interval"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_max_interval-interval" name="interval" type="Interval"
+                         association="A_max_interval">
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="A_max_interval-interval-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_max_interval-interval-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_min_interval" name="A_min_interval">
+               <memberEnd xmi:idref="Interval-min"/>
+               <memberEnd xmi:idref="A_min_interval-interval"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_min_interval-interval" name="interval" type="Interval"
+                         association="A_min_interval">
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="A_min_interval-interval-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_min_interval-interval-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_operand_expression" name="A_operand_expression">
+               <memberEnd xmi:idref="Expression-operand"/>
+               <memberEnd xmi:idref="A_operand_expression-expression"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_operand_expression-expression" name="expression" type="Expression"
+                         association="A_operand_expression">
+                  <subsettedProperty xmi:idref="Element-owner"/>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_operand_expression-expression-_lowerValue"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_event_durationObservation" name="A_event_durationObservation">
+               <memberEnd xmi:idref="DurationObservation-event"/>
+               <memberEnd xmi:idref="A_event_durationObservation-durationObservation"/>
+               <ownedEnd xmi:type="uml:Property"
+                         xmi:id="A_event_durationObservation-durationObservation" name="durationObservation" type="DurationObservation"
+                         association="A_event_durationObservation">
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_event_durationObservation-durationObservation-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_event_durationObservation-durationObservation-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_max_durationInterval" name="A_max_durationInterval">
+               <memberEnd xmi:idref="DurationInterval-max"/>
+               <memberEnd xmi:idref="A_max_durationInterval-durationInterval"/>
+               <generalization xmi:type="uml:Generalization" xmi:id="A_max_durationInterval-_generalization.0"
+                               general="A_max_interval"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_max_durationInterval-durationInterval" name="durationInterval" type="DurationInterval"
+                         association="A_max_durationInterval">
+                  <redefinedProperty xmi:idref="A_max_interval-interval"/>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_max_durationInterval-durationInterval-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_max_durationInterval-durationInterval-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_min_durationInterval" name="A_min_durationInterval">
+               <memberEnd xmi:idref="DurationInterval-min"/>
+               <memberEnd xmi:idref="A_min_durationInterval-durationInterval"/>
+               <generalization xmi:type="uml:Generalization" xmi:id="A_min_durationInterval-_generalization.0"
+                               general="A_min_interval"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_min_durationInterval-durationInterval" name="durationInterval" type="DurationInterval"
+                         association="A_min_durationInterval">
+                  <redefinedProperty xmi:idref="A_min_interval-interval"/>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_min_durationInterval-durationInterval-_lowerValue"/>
+                  <upperValue xmi:type="uml:LiteralUnlimitedNatural"
+                              xmi:id="A_min_durationInterval-durationInterval-_upperValue"
+                              value="*"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_specification_durationConstraint" name="A_specification_durationConstraint">
+               <memberEnd xmi:idref="DurationConstraint-specification"/>
+               <memberEnd xmi:idref="A_specification_durationConstraint-durationConstraint"/>
+               <generalization xmi:type="uml:Generalization"
+                               xmi:id="A_specification_durationConstraint-_generalization.0"
+                               general="A_specification_intervalConstraint"/>
+               <ownedEnd xmi:type="uml:Property"
+                         xmi:id="A_specification_durationConstraint-durationConstraint" name="durationConstraint" type="DurationConstraint"
+                         association="A_specification_durationConstraint">
+                  <redefinedProperty xmi:idref="A_specification_intervalConstraint-intervalConstraint"/>
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_specification_durationConstraint-durationConstraint-_lowerValue"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_expr_duration" name="A_expr_duration">
+               <memberEnd xmi:idref="Duration-expr"/>
+               <memberEnd xmi:idref="A_expr_duration-duration"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_expr_duration-duration" name="duration" type="Duration"
+                         association="A_expr_duration">
+                  <subsettedProperty xmi:idref="Element-owner"/>
+                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="A_expr_duration-duration-_lowerValue"/>
+               </ownedEnd>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Association" xmi:id="A_observation_duration" name="A_observation_duration">
+               <memberEnd xmi:idref="Duration-observation"/>
+               <memberEnd xmi:idref="A_observation_duration-duration"/>
+               <ownedEnd xmi:type="uml:Property" xmi:id="A_observation_duration-duration" name="duration" type="Duration"
+                         association="A_observation_duration">
+                  <lowerValue xmi:type="uml:LiteralInteger"
+                              xmi:id="A_observation_duration-duration-_lowerValue"/>
+               </ownedEnd>
+            </packagedElement>
+         </packagedElement>
+         
+         
+         
+         
+	</uml:Package>
+  <mofext:Tag xmi:id="UML_mofTag0" xmi:type="mofext:Tag" name="org.omg.xmi.nsPrefix" element="UML"/>
+</xmi:XMI>
