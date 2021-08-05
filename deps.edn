@@ -1,0 +1,9 @@
+{:paths   ["dev"]
+ :deps    {thheller/shadow-cljs {:mvn/version "2.12.5"}}
+
+ :aliases {:cljs
+           {:extra-deps
+            {datascript {:mvn/version "1.2.2"}
+             binaryage/oops {:mvn/version  "0.7.1"}}
+
+            :extra-paths ["src/dev" "src/main" "src/test"]}}}

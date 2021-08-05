@@ -1,0 +1,185 @@
+; This is the Calva evaluation results output window.
+; TIPS: The keyboard shortcut `ctrl+alt+c o` shows and focuses this window
+;   when connected to a REPL session.
+; Please see https://calva.io/output/ for more info.
+; Happy coding! ♥️
+
+; Jacking in...
+; Starting Jack-in Terminal: npx shadow-cljs -d cider/cider-nrepl:0.26.0 watch :node
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS: 
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉shadow.user꞉> 
+; Creating cljs repl session...
+; Connecting cljs repl: shadow-cljs...
+;   The Calva Connection Log might have more connection progress information.
+; Connected session: cljs, repl: :node
+; TIPS: You can choose which REPL to use (clj or cljs):
+;    *Calva: Toggle REPL connection*
+;    (There is a button in the status bar for this)
+; Jack-in done.
+cljs꞉cljs.user꞉> 
+; Evaluating file: test_db.cljs
+; No available JS runtime.
+; See https://shadow-cljs.github.io/docs/UsersGuide.html#repl-troubleshooting
+nil
+cljs꞉cljs.user꞉> 
+; Evaluating file: test_db.cljs
+; ------ REPL Error while processing ---------------------------------------------
+; (cljs.core/load-file "/home/dumeng/projects/xmi/xmi-parser-x/src/test/dumeng/test_db.cljs")
+The required namespace "dumeng.res" is not available, it was required by "dumeng/test_db.cljs" .
+"dumeng/res.clj" was found on the classpath. Should this be a .cljs file?
+
+nil
+cljs꞉dumeng.test-db꞉> 
+; Evaluating file: test_db.cljs
+; ------ REPL Error while processing ---------------------------------------------
+; (cljs.core/load-file "/home/dumeng/projects/xmi/xmi-parser-x/src/test/dumeng/test_db.cljs")
+The required namespace "dumeng.res" is not available, it was required by "dumeng/test_db.cljs" .
+"dumeng/res.clj" was found on the classpath. Should this be a .cljs file?
+
+nil
+cljs꞉dumeng.test-db꞉> 
+xmi-str
+nil
+; ------ WARNING - :undeclared-var -----------------------------------------------
+;  Resource: <eval>:1:1
+Use of undeclared Var dumeng.test-db/xmi-str
+--------------------------------------------------------------------------------
+
+cljs꞉dumeng.test-db꞉> 
+; Evaluating file: test_db.cljs
+; ------ REPL Error while processing ---------------------------------------------
+; (cljs.core/load-file "/home/dumeng/projects/xmi/xmi-parser-x/src/test/dumeng/test_db.cljs")
+------ ERROR -------------------------------------------------------------------
+ File: /home/dumeng/projects/xmi/xmi-parser-x/src/test/dumeng/test_db.cljs:8:14
+--------------------------------------------------------------------------------
+   5 |    [dumeng.parser :as parser]))
+   6 | 
+   7 | 
+   8 | (def xmi-str (inline "state.xmi"))
+--------------------^-----------------------------------------------------------
+Encountered error when macroexpanding shadow.resource/inline.
+Resource not found: state.xmi at line 8 dumeng/test_db.cljs
+--------------------------------------------------------------------------------
+   9 | 
+  10 | (defn test-parser []
+  11 |   (parser/parse-xmi xmi-str))
+  12 | 
+--------------------------------------------------------------------------------
+
+nil
+cljs꞉dumeng.test-db꞉> 
+; Evaluating file: test_db.cljs
+; 
+; Execution error (SyntaxError) at (<cljs repl>:1).
+missing ) after argument list
+:repl/exception!
+cljs꞉dumeng.test-db꞉> 
+; Evaluating file: test_db.cljs
+; 
+; Execution error (TypeError) at (<cljs repl>:1).
+Cannot read property 'PullSpec' of undefined
+:repl/exception!
+cljs꞉dumeng.test-db꞉> 
+; Evaluating file: db.cljs
+nil
+cljs꞉dumeng.db꞉> 
+; Evaluating file: test_db.cljs
+nil
+cljs꞉dumeng.test-db꞉> 
+(+ 3 4)
+cljs꞉dumeng.test-db꞉> 
+clj꞉shadow.user꞉> 
+cljs꞉dumeng.test-db꞉> 
+clj꞉shadow.user꞉> 
+cljs꞉dumeng.test-db꞉> 
+clj꞉shadow.user꞉> 
+(+ 3 4)
+7
+clj꞉dumeng.res꞉> 
+cljs꞉dumeng.test-db꞉> 
+xmi-str
+"in main"
+cljs꞉dumeng.test-db꞉> 
+; Evaluating file: test_db.cljs
+nil
+cljs꞉dumeng.test-db꞉> 
+(def parsed (test-parser))
+#object[dumeng$test_db$test_parser]
+cljs꞉dumeng.test-db꞉> 
+parsed
+nil
+; ------ WARNING - :undeclared-var -----------------------------------------------
+;  Resource: <eval>:1:1
+ Use of undeclared Var dumeng.test-db/parsed
+--------------------------------------------------------------------------------
+
+cljs꞉dumeng.test-db꞉> 
+(def x 3)
+3
+cljs꞉dumeng.test-db꞉> 
+x
+nil
+; ------ WARNING - :undeclared-var -----------------------------------------------
+;  Resource: <eval>:1:1
+ Use of undeclared Var dumeng.test-db/x
+--------------------------------------------------------------------------------
+
+cljs꞉dumeng.test-db꞉> 
+clj꞉dumeng.res꞉> 
+(def x 3)
+3
+clj꞉dumeng.res꞉> 
+x
+; Syntax error compiling at (.calva/output-window/output.calva-repl:0:0).
+; Unable to resolve symbol: x in this context
+clj꞉dumeng.res꞉> 
+(str x)
+; Syntax error compiling at (.calva/output-window/output.calva-repl:0:0).
+; Unable to resolve symbol: x in this context
+clj꞉dumeng.res꞉> 
+cljs꞉dumeng.test-db꞉> 
+*target*
+"nodejs"
+cljs꞉dumeng.test-db꞉> 
+*1
+"nodejs"
+cljs꞉dumeng.test-db꞉> 
+*2
+"nodejs"
+cljs꞉dumeng.test-db꞉> 
+(test-parser)
+#object[dumeng$test_db$test_parser]
+cljs꞉dumeng.test-db꞉> 
+(js->clj *1)
+#object[dumeng$test_db$test_parser]
+cljs꞉dumeng.test-db꞉> 
+(print-map *1)
+#object[dumeng$test_db$test_parser]
+cljs꞉dumeng.test-db꞉> 
+(.stringify js/JSON (test-parser))
+#object[dumeng$test_db$test_parser]
+cljs꞉dumeng.test-db꞉> 
+; Evaluating file: parser.cljs
+nil
+cljs꞉dumeng.parser꞉> 
+(parse-xmi "<a>3</a>")
+nil
+; ------ WARNING - :undeclared-ns ------------------------------------------------
+;  Resource: <eval>:1:1
+ No such namespace: <a>3<, could not locate _LT_a_GT_3_LT_.cljs, _LT_a_GT_3_LT_.cljc, or JavaScript source providing "<a>3<" (Please check that namespaces with dashes use underscores in the ClojureScript file name)
+--------------------------------------------------------------------------------
+
+; ------ WARNING - :undeclared-var -----------------------------------------------
+;  Resource: <eval>:1:1
+ Use of undeclared Var <a>3</a>
+--------------------------------------------------------------------------------
+
+cljs꞉dumeng.parser꞉> 

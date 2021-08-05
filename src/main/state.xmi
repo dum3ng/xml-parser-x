@@ -1,0 +1,255 @@
+<packagedElement xmi:type="uml:Class" xmi:id="State" name="State">
+    <ownedComment xmi:type="uml:Comment" xmi:id="State-_ownedComment.0" body="A State models a situation during which some (usually implicit) invariant condition holds.">
+        <annotatedElement xmi:idref="State"/>
+    </ownedComment>
+    <ownedRule xmi:type="uml:Constraint" xmi:id="State-entry_or_exit" name="entry_or_exit">
+        <constrainedElement xmi:idref="State"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-entry_or_exit-_ownedComment.0" body="Only entry or exit Pseudostates can serve as connection points.">
+            <annotatedElement xmi:idref="State-entry_or_exit"/>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="State-entry_or_exit-_specification">
+            <body>connectionPoint-&gt;forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)</body>
+            <language>OCL</language>
+        </specification>
+    </ownedRule>
+    <ownedRule xmi:type="uml:Constraint" xmi:id="State-submachine_states" name="submachine_states">
+        <constrainedElement xmi:idref="State"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-submachine_states-_ownedComment.0" body="Only submachine States can have connection point references.">
+            <annotatedElement xmi:idref="State-submachine_states"/>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="State-submachine_states-_specification">
+            <body>isSubmachineState implies connection-&gt;notEmpty( )</body>
+            <language>OCL</language>
+        </specification>
+    </ownedRule>
+    <ownedRule xmi:type="uml:Constraint" xmi:id="State-composite_states" name="composite_states">
+        <constrainedElement xmi:idref="State"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-composite_states-_ownedComment.0" body="Only composite States can have entry or exit Pseudostates defined.">
+            <annotatedElement xmi:idref="State-composite_states"/>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="State-composite_states-_specification">
+            <body>connectionPoint-&gt;notEmpty() implies isComposite</body>
+            <language>OCL</language>
+        </specification>
+    </ownedRule>
+    <ownedRule xmi:type="uml:Constraint" xmi:id="State-destinations_or_sources_of_transitions" name="destinations_or_sources_of_transitions">
+        <constrainedElement xmi:idref="State"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-destinations_or_sources_of_transitions-_ownedComment.0" body="The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.">
+            <annotatedElement xmi:idref="State-destinations_or_sources_of_transitions"/>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="State-destinations_or_sources_of_transitions-_specification">
+            <body>self.isSubmachineState implies (self.connection-&gt;forAll (cp |
+  cp.entry-&gt;forAll (ps | ps.stateMachine = self.submachine) and
+  cp.exit-&gt;forAll (ps | ps.stateMachine = self.submachine)))</body>
+            <language>OCL</language>
+        </specification>
+    </ownedRule>
+    <ownedRule xmi:type="uml:Constraint" xmi:id="State-submachine_or_regions" name="submachine_or_regions">
+        <constrainedElement xmi:idref="State"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-submachine_or_regions-_ownedComment.0" body="A State is not allowed to have both a submachine and Regions.">
+            <annotatedElement xmi:idref="State-submachine_or_regions"/>
+        </ownedComment>
+        <specification xmi:type="uml:OpaqueExpression" xmi:id="State-submachine_or_regions-_specification">
+            <body>isComposite implies not isSubmachineState</body>
+            <language>OCL</language>
+        </specification>
+    </ownedRule>
+    <generalization xmi:type="uml:Generalization" xmi:id="State-_generalization.0" general="Namespace"/>
+    <generalization xmi:type="uml:Generalization" xmi:id="State-_generalization.2" general="Vertex"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-connection" name="connection" aggregation="composite" type="ConnectionPointReference" association="A_connection_state">
+        <subsettedProperty xmi:idref="Namespace-ownedMember"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-connection-_ownedComment.0" body="The entry and exit connection points used in conjunction with this (submachine) State, i.e., as targets and sources, respectively, in the Region with the submachine State. A connection point reference references the corresponding definition of a connection point Pseudostate in the StateMachine referenced by the submachine State.">
+            <annotatedElement xmi:idref="State-connection"/>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="State-connection-_lowerValue"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="State-connection-_upperValue" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-connectionPoint" name="connectionPoint" aggregation="composite" type="Pseudostate" association="A_connectionPoint_state">
+        <subsettedProperty xmi:idref="Namespace-ownedMember"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-connectionPoint-_ownedComment.0" body="The entry and exit Pseudostates of a composite State. These can only be entry or exit Pseudostates, and they must have different names. They can only be defined for composite States.">
+            <annotatedElement xmi:idref="State-connectionPoint"/>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="State-connectionPoint-_lowerValue"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="State-connectionPoint-_upperValue" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-deferrableTrigger" name="deferrableTrigger" aggregation="composite" type="Trigger" association="A_deferrableTrigger_state">
+        <subsettedProperty xmi:idref="Element-ownedElement"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-deferrableTrigger-_ownedComment.0" body="A list of Triggers that are candidates to be retained by the StateMachine if they trigger no Transitions out of the State (not consumed). A deferred Trigger is retained until the StateMachine reaches a State configuration where it is no longer deferred.">
+            <annotatedElement xmi:idref="State-deferrableTrigger"/>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="State-deferrableTrigger-_lowerValue"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="State-deferrableTrigger-_upperValue" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-doActivity" name="doActivity" aggregation="composite" type="Behavior" association="A_doActivity_state">
+        <subsettedProperty xmi:idref="Element-ownedElement"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-doActivity-_ownedComment.0" body="An optional Behavior that is executed while being in the State. The execution starts when this State is entered, and ceases either by itself when done, or when the State is exited, whichever comes first.">
+            <annotatedElement xmi:idref="State-doActivity"/>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="State-doActivity-_lowerValue"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-entry" name="entry" aggregation="composite" type="Behavior" association="A_entry_state">
+        <subsettedProperty xmi:idref="Element-ownedElement"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-entry-_ownedComment.0" body="An optional Behavior that is executed whenever this State is entered regardless of the Transition taken to reach the State. If defined, entry Behaviors are always executed to completion prior to any internal Behavior or Transitions performed within the State.">
+            <annotatedElement xmi:idref="State-entry"/>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="State-entry-_lowerValue"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-exit" name="exit" aggregation="composite" type="Behavior" association="A_exit_state">
+        <subsettedProperty xmi:idref="Element-ownedElement"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-exit-_ownedComment.0" body="An optional Behavior that is executed whenever this State is exited regardless of which Transition was taken out of the State. If defined, exit Behaviors are always executed to completion only after all internal and transition Behaviors have completed execution.">
+            <annotatedElement xmi:idref="State-exit"/>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="State-exit-_lowerValue"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-isComposite" name="isComposite" isReadOnly="true" isDerived="true">
+        <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-isComposite-_ownedComment.0" body="A state with isComposite=true is said to be a composite State. A composite State is a State that contains at least one Region.">
+            <annotatedElement xmi:idref="State-isComposite"/>
+        </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-isOrthogonal" name="isOrthogonal" isReadOnly="true" isDerived="true">
+        <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-isOrthogonal-_ownedComment.0" body="A State with isOrthogonal=true is said to be an orthogonal composite State An orthogonal composite State contains two or more Regions.">
+            <annotatedElement xmi:idref="State-isOrthogonal"/>
+        </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-isSimple" name="isSimple" isReadOnly="true" isDerived="true">
+        <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-isSimple-_ownedComment.0" body="A State with isSimple=true is said to be a simple State A simple State does not have any Regions and it does not refer to any submachine StateMachine.">
+            <annotatedElement xmi:idref="State-isSimple"/>
+        </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-isSubmachineState" name="isSubmachineState" isReadOnly="true" isDerived="true">
+        <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-isSubmachineState-_ownedComment.0" body="A State with isSubmachineState=true is said to be a submachine State Such a State refers to another StateMachine(submachine).">
+            <annotatedElement xmi:idref="State-isSubmachineState"/>
+        </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-region" name="region" aggregation="composite" type="Region" association="A_region_state">
+        <subsettedProperty xmi:idref="Namespace-ownedMember"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-region-_ownedComment.0" body="The Regions owned directly by the State.">
+            <annotatedElement xmi:idref="State-region"/>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="State-region-_lowerValue"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="State-region-_upperValue" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-stateInvariant" name="stateInvariant" aggregation="composite" type="Constraint" association="A_stateInvariant_owningState">
+        <subsettedProperty xmi:idref="Namespace-ownedRule"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-stateInvariant-_ownedComment.0" body="Specifies conditions that are always true when this State is the current State. In ProtocolStateMachines state invariants are additional conditions to the preconditions of the outgoing Transitions, and to the postcondition of the incoming Transitions.">
+            <annotatedElement xmi:idref="State-stateInvariant"/>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="State-stateInvariant-_lowerValue"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="State-submachine" name="submachine" type="StateMachine" association="A_submachineState_submachine">
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-submachine-_ownedComment.0" body="The StateMachine that is to be inserted in place of the (submachine) State.">
+            <annotatedElement xmi:idref="State-submachine"/>
+        </ownedComment>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="State-submachine-_lowerValue"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="State-containingStateMachine" name="containingStateMachine" isQuery="true" bodyCondition="State-containingStateMachine-spec">
+        <redefinedOperation xmi:idref="Vertex-containingStateMachine"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-containingStateMachine-_ownedComment.0" body="The query containingStateMachine() returns the StateMachine that contains the State either directly or transitively.">
+            <annotatedElement xmi:idref="State-containingStateMachine"/>
+        </ownedComment>
+        <ownedRule xmi:type="uml:Constraint" xmi:id="State-containingStateMachine-spec" name="spec">
+            <constrainedElement xmi:idref="State-containingStateMachine"/>
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="State-containingStateMachine-spec-_specification">
+                <body>result = (container.containingStateMachine())</body>
+                <language>OCL</language>
+            </specification>
+        </ownedRule>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="State-containingStateMachine-result" name="result" direction="return" type="StateMachine"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="State-isComposite.1" name="isComposite" isQuery="true" bodyCondition="State-isComposite.1-spec">
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-isComposite.1-_ownedComment.0" body="A composite State is a State with at least one Region.">
+            <annotatedElement xmi:idref="State-isComposite.1"/>
+        </ownedComment>
+        <ownedRule xmi:type="uml:Constraint" xmi:id="State-isComposite.1-spec" name="spec">
+            <constrainedElement xmi:idref="State-isComposite.1"/>
+            <constrainedElement xmi:idref="State-isComposite"/>
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="State-isComposite.1-spec-_specification">
+                <body>result = (region-&gt;notEmpty())</body>
+                <language>OCL</language>
+            </specification>
+        </ownedRule>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="State-isComposite.1-result" name="result" direction="return">
+            <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+        </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="State-isConsistentWith" name="isConsistentWith" isQuery="true" bodyCondition="State-isConsistentWith-spec">
+        <precondition xmi:idref="State-isConsistentWith-pre"/>
+        <redefinedOperation xmi:idref="RedefinableElement-isConsistentWith"/>
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-isConsistentWith-_ownedComment.0" body="The query isConsistentWith specifies that a non-final State can only be redefined by a non-final State (this is overridden by FinalState to allow a FinalState to be redefined by a FinalState) and, if the redefined State is a submachine State, then the redefining State must be a submachine state whose submachine is a redefinition of the submachine of the redefined State. Note that consistency requirements for the redefinition of Regions and connectionPoint Pseudostates within a composite State and connection ConnectionPoints of a submachine State are specified by the isConsistentWith and isRedefinitionContextValid operations for Region and Vertex (and its subclasses, Pseudostate and ConnectionPointReference).">
+            <annotatedElement xmi:idref="State-isConsistentWith"/>
+        </ownedComment>
+        <ownedRule xmi:type="uml:Constraint" xmi:id="State-isConsistentWith-spec" name="spec">
+            <constrainedElement xmi:idref="State-isConsistentWith"/>
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="State-isConsistentWith-spec-_specification">
+                <body>result = (redefiningElement.oclIsTypeOf(State) and 
+  let redefiningState : State = redefiningElement.oclAsType(State) in
+    submachine &lt;&gt; null implies (redefiningState.submachine &lt;&gt; null and
+      redefiningState.submachine.extendedStateMachine-&gt;includes(submachine)))</body>
+                <language>OCL</language>
+            </specification>
+        </ownedRule>
+        <ownedRule xmi:type="uml:Constraint" xmi:id="State-isConsistentWith-pre" name="pre">
+            <constrainedElement xmi:idref="State-isConsistentWith"/>
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="State-isConsistentWith-pre-_specification">
+                <body>redefiningElement.isRedefinitionContextValid(self)</body>
+                <language>OCL</language>
+            </specification>
+        </ownedRule>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="State-isConsistentWith-result" name="result" direction="return">
+            <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="State-isConsistentWith-redefiningElement" name="redefiningElement" type="RedefinableElement"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="State-isOrthogonal.1" name="isOrthogonal" isQuery="true" bodyCondition="State-isOrthogonal.1-spec">
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-isOrthogonal.1-_ownedComment.0" body="An orthogonal State is a composite state with at least 2 regions.">
+            <annotatedElement xmi:idref="State-isOrthogonal.1"/>
+        </ownedComment>
+        <ownedRule xmi:type="uml:Constraint" xmi:id="State-isOrthogonal.1-spec" name="spec">
+            <constrainedElement xmi:idref="State-isOrthogonal.1"/>
+            <constrainedElement xmi:idref="State-isOrthogonal"/>
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="State-isOrthogonal.1-spec-_specification">
+                <body>result = (region-&gt;size () &gt; 1)</body>
+                <language>OCL</language>
+            </specification>
+        </ownedRule>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="State-isOrthogonal.1-result" name="result" direction="return">
+            <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+        </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="State-isSimple.1" name="isSimple" isQuery="true" bodyCondition="State-isSimple.1-spec">
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-isSimple.1-_ownedComment.0" body="A simple State is a State without any regions.">
+            <annotatedElement xmi:idref="State-isSimple.1"/>
+        </ownedComment>
+        <ownedRule xmi:type="uml:Constraint" xmi:id="State-isSimple.1-spec" name="spec">
+            <constrainedElement xmi:idref="State-isSimple.1"/>
+            <constrainedElement xmi:idref="State-isSimple"/>
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="State-isSimple.1-spec-_specification">
+                <body>result = ((region-&gt;isEmpty()) and not isSubmachineState())</body>
+                <language>OCL</language>
+            </specification>
+        </ownedRule>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="State-isSimple.1-result" name="result" direction="return">
+            <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+        </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="State-isSubmachineState.1" name="isSubmachineState" isQuery="true" bodyCondition="State-isSubmachineState.1-spec">
+        <ownedComment xmi:type="uml:Comment" xmi:id="State-isSubmachineState.1-_ownedComment.0" body="Only submachine State references another StateMachine.">
+            <annotatedElement xmi:idref="State-isSubmachineState.1"/>
+        </ownedComment>
+        <ownedRule xmi:type="uml:Constraint" xmi:id="State-isSubmachineState.1-spec" name="spec">
+            <constrainedElement xmi:idref="State-isSubmachineState.1"/>
+            <constrainedElement xmi:idref="State-isSubmachineState"/>
+            <specification xmi:type="uml:OpaqueExpression" xmi:id="State-isSubmachineState.1-spec-_specification">
+                <body>result = (submachine &lt;&gt; null)</body>
+                <language>OCL</language>
+            </specification>
+        </ownedRule>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="State-isSubmachineState.1-result" name="result" direction="return">
+            <type href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#Boolean"/>
+        </ownedParameter>
+    </ownedOperation>
+</packagedElement>

@@ -1,11 +1,14 @@
 ;; shadow-cljs configuration
-{:source-paths
- ["src/dev"
-  "src/main"
-  "src/test"]
-
- :dependencies
- [[datascript "1.2.2"]]
+{:deps {:aliases [:cljs]}
 
  :builds
- {}}
+       {:node
+        {:target           :node-script
+         :main             dumeng.core/main
+         :output-to        "out/xmi_parser/main.js"
+         :compiler-options {
+                            :infer-externs :auto
+                            }
+         }}}
+
+
