@@ -6,6 +6,7 @@
     ["path" :as path]
     ["process" :as process]
     [dumeng.logger :refer [log]]
+    [dumeng.editor :refer [get-edit-type]]
     [oops.core :refer [oget oset! ocall]]))
 
 (declare add-class-info-sheet)
@@ -50,7 +51,8 @@
               "multiplicity",
               "isReadOnly",
               "isDerived"
-              "isDerivedUnion",])
+              "isDerivedUnion",
+              "editType"])
 
 (defn add-attribute-sheet
   [^js wb data]
@@ -72,12 +74,12 @@
                 (set-value-at! "multiplicity" (str
                                                 (get-in attr [:multiplicity :lower])
                                                 ".."
-                                                (get-in attr [:multiplicity :upper]))))
-
-              (set-value-at! row "type" (if-let [t (:type attr)]
-                                          (last (str/split t #"#"))))
+                                                (get-in attr [:multiplicity :upper])))
+                (set-value-at! "type" (if-let [t (:type attr)]
+                                        (last (str/split t #"#")))))
               (doseq [^js k ["isReadOnly" "isDerived" "isDerivedUnion"]]
                 (set-value-at! row k (get attr (keyword k))))
+              (set-value-at! row "editType" (name (get-edit-type attr)))
               (swap! idx inc)
               )))))))
 
