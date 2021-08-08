@@ -1,10 +1,12 @@
 (ns dumeng.excel
-  (:require ["exceljs" :as excel]
-            ["os" :as os]
-            ["path" :as path]
-            ["process" :as process]
-            [dumeng.logger :refer [log]]
-            [oops.core :refer [oget oset! ocall]]))
+  (:require
+    [clojure.string :as str]
+    ["exceljs" :as excel]
+    ["os" :as os]
+    ["path" :as path]
+    ["process" :as process]
+    [dumeng.logger :refer [log]]
+    [oops.core :refer [oget oset! ocall]]))
 
 (declare add-class-info-sheet)
 (declare add-attribute-sheet)
@@ -44,10 +46,11 @@
 (def headers ["className",
               "attributeName",
               "comment",
+              "type",
               "multiplicity",
               "isReadOnly",
               "isDerived"
-              "isDerivedunion",])
+              "isDerivedUnion",])
 
 (defn add-attribute-sheet
   [^js wb data]
@@ -71,7 +74,8 @@
                                                 ".."
                                                 (get-in attr [:multiplicity :upper]))))
 
-              (set-value-at! row "isReadOnly" (:isReadOnly attr))
+              (set-value-at! row "type" (if-let [t (:type attr)]
+                                          (last (str/split t #"#"))))
               (doseq [^js k ["isReadOnly" "isDerived" "isDerivedUnion"]]
                 (set-value-at! row k (get attr (keyword k))))
               (swap! idx inc)

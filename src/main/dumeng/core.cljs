@@ -22,16 +22,18 @@
 
 (defn get-attribute-detail
   "for every attr, get
+  - attributes (in the entity)
   - comment
+  - type
   - multiplicity
   - etc. "
   [eid]
-  (let [q-comment '[:find ?body
-                    :in $ ?owner
-                    :where
-                    [?e :entity/type :ownedComment]
-                    [?e :owner ?owner]
-                    [?e :body ?body]]
+  (let [q '[:find (pull ?e [*])
+            :in $ ?owner
+            :where
+            (or [?e :entity/type :ownedComment]
+                [?e :entity/type :type])
+            [?e :owner ?owner]]
         q-mul '[:find ?e ?type ?value
                 :in $ ?owner
                 :where
@@ -40,16 +42,20 @@
                 [?e :owner ?owner]
                 [?e :entity/type ?type]
                 [(get-else $ ?e :value 0) ?value]]
-        comment (-> (db/q q-comment eid)
-                    (into [])
-                    (ffirst))
+        members (->> (db/q q eid)
+                     (map first)
+                     (into []))
+        type (some #(if (= :type (:entity/type %)) %) members)
+        comment (some #(if (= :ownedComment (:entity/type %)) %) members)
         muls (db/q q-mul eid)
         lower (if-let [l (some #(if (= (nth % 1) :lowerValue) %) muls)]
                 (nth l 2) 1)
         upper (if-let [l (some #(if (= (nth % 1) :upperValue) %) muls)]
                 (nth l 2) 1)
         ]
-    {:comment comment :multiplicity {:lower lower :upper upper}}))
+    {:comment      (if comment (:body comment))
+     :type         (if type (:href type))
+     :multiplicity {:lower lower :upper upper}}))
 
 (defn get-class-detail
   [cls-name eid]
@@ -84,6 +90,8 @@
             [?e :name ?name]]
         clss (db/q q)]
     (into [] clss)))
+
+#_(def file (ocall path "resolve" (ocall process "cwd") "resources/state.xmi"))
 
 (defn get-data
   []
