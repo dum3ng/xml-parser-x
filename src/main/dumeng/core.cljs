@@ -105,9 +105,11 @@
 (defn main
   []
   (let [file (nth (.-argv process) 2)
-        file (ocall path "resolve" (ocall process "cwd") file)]
+        file (ocall path "resolve" (ocall process "cwd") file)
+        out-file (nth (.-argv process) 3 nil)
+        out-file (if out-file (ocall path "resolve" (ocall process "cwd") out-file)) ]
     (fill-db! file)
     (log "database ready.")
     (let [data (get-data)]
-      (print data)
-      (excel/write-excel! data))))
+      #_(print data)
+      (excel/write-excel! data :out-file out-file))))

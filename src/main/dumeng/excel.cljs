@@ -16,8 +16,10 @@
 (def Workbook (oget excel "Workbook"))
 
 (defn write-excel!
-  [data]
-  (let [wb (Workbook.)]
+  [data & {:keys [out-file] }]
+  (let [wb (Workbook.)
+        out-file (or out-file (ocall path "join"
+                                     (ocall process "cwd") "temp/UML_metamodel.xlsx"))]
     (do
       #_(oset! wb "creator" (-> os
                                 (ocall "userInfo")
@@ -27,9 +29,8 @@
       (add-note-sheet wb data)
       ;; TODO: use `go` to do async stuff
       (ocall (oget wb "xlsx") "writeFile"
-             (ocall path "join"
-                    (ocall process "cwd") "temp/UML_metamodel.xlsx"))
-      (log "data is write into ..."))))
+             out-file)
+      (log (str "data is write into " out-file)))))
 
 (defn- set-value-at! [row i v]
   (let [cell (.getCell ^js row i)]
@@ -58,10 +59,22 @@
   [^js wb data]
   (let [^js sheet (.addWorksheet wb "UML Attributes")
         header-row (.getRow sheet 1)
-        idx (atom 2)]
+        idx (atom 2)
+        ;; get all attributes in an xmi entity
+        entity-attrs (->> (map #(->> % :attributes (map keys) flatten) data)
+                          flatten
+                          set
+                          (into [])
+                          (remove (fn [x] (some #(= x %) [:name :xmi:type :xmi:id
+                                                          :entity/type :db/id :owner
+                                                          :comment :multiplicity
+                                                          :type]))))
+        hs (into []
+                 (distinct (concat headers (map name entity-attrs))))]
     (do
-      (set! (.-columns sheet) (clj->js (map (fn [h] #js{:key h}) headers)))
-      (doseq [[i x] (map-indexed vector headers)]
+      (set! (.-columns sheet) (clj->js (map (fn [h] #js{:key h}) hs)))
+      ;; add header row
+      (doseq [[i x] (map-indexed vector hs)]
         (set-value-at! header-row (inc i) x))
       (doseq [cls data]
         (let [attrs (:attributes cls)]
@@ -77,11 +90,12 @@
                                                 (get-in attr [:multiplicity :upper])))
                 (set-value-at! "type" (if-let [t (:type attr)]
                                         (last (str/split t #"#")))))
-              (doseq [^js k ["isReadOnly" "isDerived" "isDerivedUnion"]]
-                (set-value-at! row k (get attr (keyword k))))
+              (doseq [k entity-attrs]
+                (set-value-at! row (name k) (k attr)))
+              #_(doseq [^js k ["isReadOnly" "isDerived" "isDerivedUnion"]]
+                  (set-value-at! row k (get attr (keyword k))))
               (set-value-at! row "editType" (name (get-edit-type attr)))
-              (swap! idx inc)
-              )))))))
+              (swap! idx inc))))))))
 
 (defn add-note-sheet
   [^js wb _]
